@@ -60,7 +60,7 @@ describe('User Model', function () {
                     })];
                 case 1:
                     result = _a.sent();
-                    console.log(result.id);
+                    // console.log(result.id)
                     expect(result.password).not.toEqual('password');
                     return [2 /*return*/];
             }

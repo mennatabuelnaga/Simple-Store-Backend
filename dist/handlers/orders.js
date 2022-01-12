@@ -79,7 +79,6 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                console.log("received user id:", req.body.user_id);
                 return [4 /*yield*/, order_store.create(Number(req.body.user_id))];
             case 1:
                 created = _a.sent();
@@ -133,10 +132,10 @@ var fetchUserOrders = function (req, res) { return __awaiter(void 0, void 0, voi
     });
 }); };
 var order_routes = function (app) {
-    app.get('/orders', index);
-    app.get('/orders/:id', show);
-    app.post('/orders/:user_id', create);
-    app.post('/orders/:id/add', addProduct);
+    app.get('/orders', verifyToken_1.default, index);
+    app.get('/orders/:id', verifyToken_1.default, show);
+    app.post('/orders/:user_id', verifyToken_1.default, create);
+    app.post('/orders/:id/add', verifyToken_1.default, addProduct);
     // Current Orders by user
     app.get('/orders/:user_id', verifyToken_1.default, fetchUserOrders);
 };

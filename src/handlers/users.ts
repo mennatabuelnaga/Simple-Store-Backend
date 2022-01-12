@@ -33,7 +33,7 @@ const create = async (req: Request, res: Response) => {
             { user: created },
             process.env.TOKEN_SECRET!
         );
-        console.log(token);
+        // console.log(token);
         res.json(token);
         // res.json(created);
     } catch (err) {
@@ -58,7 +58,7 @@ const user_routes = (app: express.Application): void => {
     // Create [returns token]
     app.post('/users', create);
     // Delete user
-    app.delete('/users', delete_user);
+    app.delete('/users', verifyAuthToken, delete_user);
 
 };
 

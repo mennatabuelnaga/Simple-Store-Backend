@@ -101,9 +101,9 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
 }); };
 var product_routes = function (app) {
     // Index
-    app.get('/products', index);
+    app.get('/products', verifyToken_1.default, index);
     // Show
-    app.get('/products/:id', show);
+    app.get('/products/:id', verifyToken_1.default, show);
     // Create [token required]
     app.post('/products', verifyToken_1.default, create);
 };

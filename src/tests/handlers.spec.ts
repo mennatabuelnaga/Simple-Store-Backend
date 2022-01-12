@@ -17,7 +17,7 @@ describe('Users Handler', () => {
         }
         const response = await request.post('/users').send(user);
         token = response.body;
-        console.log("received token = ", token)
+        // console.log("received token = ", token)
         expect(token.split('.').length).toBeGreaterThan(1);
         
     });
@@ -52,8 +52,8 @@ describe('Orders handlers', () => {
         //     current_status: "active",
         //     user_id: 1,
         // }
-        response = await request.post("/orders/1").send({user_id:1});
-        console.log(response.body)
+        response = await request.post("/orders/1").send({user_id:1}).set('Authorization', `Bearer ${token}`);
+        // console.log(response.body)
         expect(response.body.user_id).toEqual("1");
 
         
@@ -61,7 +61,7 @@ describe('Orders handlers', () => {
 
     // index orders
     it('index orders with token 200', async () => {
-        const response = await request.get('/orders')
+        const response = await request.get('/orders').set('Authorization', `Bearer ${token}`)
         // console.log("responce = ", response)
         expect(response.status).toEqual(200);
         
@@ -84,7 +84,7 @@ describe('Products handlers', () => {
             last_name: 'last5',
             password: 'randompassword5'
         }
-        const resp = await request.post('/users').send(user);
+        const resp = await request.post('/users').send(user).set('Authorization', `Bearer ${token}`);
         token = resp.body;
 
         const product = {
@@ -92,7 +92,7 @@ describe('Products handlers', () => {
             price: 20,
         }
         let response = await request.post('/products').send(product).set('Authorization', `Bearer ${token}`)
-        console.log("************", response.body)
+        // console.log("************", response.body)
         // expect(response.body.name).toEqual("p5");
 
         
@@ -100,7 +100,7 @@ describe('Products handlers', () => {
 
     // index products
     it('index products with token 200', async () => {
-        const response = await request.get('/products')
+        const response = await request.get('/products').set('Authorization', `Bearer ${token}`)
         // console.log("responce = ", response)
         expect(response.status).toEqual(200);
         
@@ -108,7 +108,7 @@ describe('Products handlers', () => {
 
     // Show products
     it('show products with token 200', async () => {
-        const response = await request.get('/products/1')
+        const response = await request.get('/products/1').set('Authorization', `Bearer ${token}`)
         expect(response.status).toEqual(200);
         
     });

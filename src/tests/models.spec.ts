@@ -20,7 +20,7 @@ describe('User Model', () => {
             last_name: 'last1',
             password: 'pass1',
         });
-        console.log(result.id)
+        // console.log(result.id)
         expect(result.password).not.toEqual('password');
     });
 

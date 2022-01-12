@@ -92,7 +92,7 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
             case 2:
                 created = _a.sent();
                 token = jsonwebtoken_1.default.sign({ user: created }, process.env.TOKEN_SECRET);
-                console.log(token);
+                // console.log(token);
                 res.json(token);
                 return [3 /*break*/, 4];
             case 3:
@@ -130,6 +130,6 @@ var user_routes = function (app) {
     // Create [returns token]
     app.post('/users', create);
     // Delete user
-    app.delete('/users', delete_user);
+    app.delete('/users', verifyToken_1.default, delete_user);
 };
 exports.default = user_routes;

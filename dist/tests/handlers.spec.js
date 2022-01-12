@@ -58,7 +58,7 @@ describe('Users Handler', function () {
                 case 1:
                     response = _a.sent();
                     token = response.body;
-                    console.log("received token = ", token);
+                    // console.log("received token = ", token)
                     expect(token.split('.').length).toBeGreaterThan(1);
                     return [2 /*return*/];
             }
@@ -106,7 +106,7 @@ describe('Orders handlers', function () {
                 case 1:
                     response = _a.sent();
                     token = response.body;
-                    return [4 /*yield*/, request.post("/orders/1").send({ user_id: 1 })];
+                    return [4 /*yield*/, request.post("/orders/1").send({ user_id: 1 }).set('Authorization', "Bearer ".concat(token))];
                 case 2:
                     // console.log("token = ", token)
                     // let order = {
@@ -114,7 +114,7 @@ describe('Orders handlers', function () {
                     //     user_id: 1,
                     // }
                     response = _a.sent();
-                    console.log(response.body);
+                    // console.log(response.body)
                     expect(response.body.user_id).toEqual("1");
                     return [2 /*return*/];
             }
@@ -125,7 +125,7 @@ describe('Orders handlers', function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/orders')
+                case 0: return [4 /*yield*/, request.get('/orders').set('Authorization', "Bearer ".concat(token))
                     // console.log("responce = ", response)
                 ];
                 case 1:
@@ -163,7 +163,7 @@ describe('Products handlers', function () {
                         last_name: 'last5',
                         password: 'randompassword5'
                     };
-                    return [4 /*yield*/, request.post('/users').send(user)];
+                    return [4 /*yield*/, request.post('/users').send(user).set('Authorization', "Bearer ".concat(token))];
                 case 1:
                     resp = _a.sent();
                     token = resp.body;
@@ -171,10 +171,12 @@ describe('Products handlers', function () {
                         name: 'p5',
                         price: 20,
                     };
-                    return [4 /*yield*/, request.post('/products').send(product).set('Authorization', "Bearer ".concat(token))];
+                    return [4 /*yield*/, request.post('/products').send(product).set('Authorization', "Bearer ".concat(token))
+                        // console.log("************", response.body)
+                        // expect(response.body.name).toEqual("p5");
+                    ];
                 case 2:
                     response = _a.sent();
-                    console.log("************", response.body);
                     return [2 /*return*/];
             }
         });
@@ -184,7 +186,7 @@ describe('Products handlers', function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/products')
+                case 0: return [4 /*yield*/, request.get('/products').set('Authorization', "Bearer ".concat(token))
                     // console.log("responce = ", response)
                 ];
                 case 1:
@@ -200,7 +202,7 @@ describe('Products handlers', function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/products/1')];
+                case 0: return [4 /*yield*/, request.get('/products/1').set('Authorization', "Bearer ".concat(token))];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toEqual(200);

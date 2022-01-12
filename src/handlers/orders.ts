@@ -21,7 +21,7 @@ const show = async (req:Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
     try {
-        console.log("received user id:", req.body.user_id)
+        // console.log("received user id:", req.body.user_id)
         const created = await order_store.create(Number(req.body.user_id));
         // console.log("created order++++++", created)
         res.json(created);
@@ -53,10 +53,10 @@ const fetchUserOrders = async (req: Request, res: Response) => {
 }
 
 const order_routes = (app: express.Application): void => {
-    app.get('/orders', index);
-    app.get('/orders/:id', show);
-    app.post('/orders/:user_id', create);
-    app.post('/orders/:id/add', addProduct);
+    app.get('/orders', verifyAuthToken, index);
+    app.get('/orders/:id', verifyAuthToken, show);
+    app.post('/orders/:user_id', verifyAuthToken, create);
+    app.post('/orders/:id/add', verifyAuthToken, addProduct);
     // Current Orders by user
     app.get('/orders/:user_id', verifyAuthToken, fetchUserOrders);
 };
