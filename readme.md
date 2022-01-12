@@ -26,8 +26,8 @@ GRANT ALL PRIVILEGES ON DATABASE storefront_test TO storefront_user;
 ```
 - Make sure to fill in your .env file (find a sample in .env.example file)
 (To install required packages) npm install
-(To create users, products, and orders tables in storefront_dev) npx db-migrate up -e dev
-(To drop tables in storefront_dev) npx db-migrate down -e dev -c 3 
+(To create users, products, orders, and orders_details tables in storefront_dev) npx db-migrate up -e dev
+(To drop tables in storefront_dev) npx db-migrate down -e dev -c 4
 (To run server) npm run start
 (To run tests) npm run test
 ````
